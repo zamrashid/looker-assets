@@ -6,32 +6,75 @@
 <meta http-equiv="Expires" content="0" />
 
 <style>
-@keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
 .blink {
   font-size: 32px;
   font-weight: bold;
   color: red;
-  animation: blink 2s infinite;
-  line-height: 1; /* jarak baris */
+  line-height: 2;
+  text-align: center;
 }
 
-.blink span {
-  display: block; /* buat setiap span satu baris */
+/* Animasi muncul 2 saat, hilang 2 saat */
+@keyframes showHide {
+  0%, 50% { opacity: 0; }   /* tersembunyi 50% masa */
+  51%, 100% { opacity: 1; } /* muncul 50% masa (2 saat) */
+}
+
+.message span {
+  display: block;
+  opacity: 0;
+  animation: showHide 4s infinite; /* total 4s: 2s muncul, 2s hilang */
 }
 </style>
 </head>
 <body>
 
-<div class="blink">
-  <span>⚠️ MESYUARAT EXCO PIBG</span>
-  <span>📌 DEWAN MAKAN SKLB</span>
-  <span>🕒 12:00 Tengahari</span>
+<div class="blink message" id="dailyMessage">
+  <!-- Mesej akan dimasukkan melalui JavaScript -->
 </div>
+
+<script>
+// Tetapkan event untuk tarikh tertentu
+// Format: "YYYY-MM-DD" : [array baris mesej]
+const events = {
+  "2025-11-19": [
+    "📌 TAKLIMAT EXCO PIBG 12.00PM DEWAN MAKAN ASRAMA",
+    "📌 MESYUARAT KOKURIKULUM 3.30PM BILIK MESYUARAT"
+  ],
+  "2025-11-21": [
+    "🏆 HARI SUKANTARA SEKOLAH",
+    "🕘 8.00AM"
+  ],
+  "2025-11-24": [
+    "🏆 SUKAN SEKOLAH - ACARA PADANG",
+    "🕘 Aktiviti bermula 3:00PM"
+  ],
+  "2025-11-25": [
+    "🏆 SUKAN SEKOLAH - ACARA PADANG",
+    "🕘 Aktiviti bermula 3:00PM"
+  ],
+  "2025-11-26": [
+    "🏆 SUKAN SEKOLAH - ACARA PADANG",
+    "🕘 Aktiviti bermula 3:00PM"
+  ],
+  "2025-11-28": [
+    "🏆 SUKAN SEKOLAH - ACARA BALAPAN",
+    "🕘 Aktiviti bermula 7:00AM"
+  ]
+};
+
+// Dapatkan tarikh hari ini
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, '0');
+const dd = String(today.getDate()).padStart(2, '0');
+const todayStr = `${yyyy}-${mm}-${dd}`;
+
+// Paparkan mesej hari ini
+const messageDiv = document.getElementById("dailyMessage");
+const todayMessages = events[todayStr] || [];
+messageDiv.innerHTML = todayMessages.map(msg => `<span>${msg}</span>`).join("");
+</script>
 
 </body>
 </html>
