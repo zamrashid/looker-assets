@@ -6,37 +6,31 @@
 <meta http-equiv="Expires" content="0" />
 
 <style>
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 .blink {
   font-size: 32px;
   font-weight: bold;
   color: red;
-  line-height: 2;
+  animation: blink 2s infinite;
+  line-height: 1; /* jarak baris */
 }
 
 .blink span {
-  display: block;
-  opacity: 0; /* mula semua tersembunyi */
-  animation: showSequence 8s infinite; /* total duration 8s */
-}
-
-/* Animasi setiap baris */
-.blink span:nth-child(1) { animation-delay: 0s; }
-.blink span:nth-child(2) { animation-delay: 2s; }
-.blink span:nth-child(3) { animation-delay: 4s; }
-
-@keyframes showSequence {
-  0%, 24.9% { opacity: 0; }   /* mula tersembunyi */
-  25%, 49.9% { opacity: 1; }  /* muncul */
-  50%, 100% { opacity: 0; }   /* hilang semua */
+  display: block; /* buat setiap span satu baris */
 }
 </style>
 </head>
 <body>
 
 <div class="blink">
-  <span>⚠️ MESYUARAT EXCO PIBG 12PM</span>
-  <span>📌 DEWAN MAKAN</span>
-  <span>🕒 12:00 tengahari</span>
+  <span>⚠️ MESYUARAT EXCO PIBG</span>
+  <span>📌 DEWAN MAKAN SKLB</span>
+  <span>🕒 12:00 Tengahari</span>
 </div>
 
 </body>
